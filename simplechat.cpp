@@ -1,5 +1,7 @@
 #include <iostream>
-using namespace std;
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
 
 string send_msg = "Hello, world!";
 string receive_msg = "Hi";
