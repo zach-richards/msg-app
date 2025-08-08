@@ -1,3 +1,6 @@
+
+# Run the server first and then the client to test
+
 import asyncio
 import websockets
 
@@ -16,4 +19,11 @@ async def hello():
         print(f"< Received: {response}")
 
 if __name__ == "__main__":
-    asyncio.run(hello())
+    try:
+        asyncio.run(hello())
+    except KeyboardInterrupt: # Error handling
+        print("\nConnection stopped manually.")
+    except ConnectionRefusedError:
+        print("\nConnection refused. Is the server running?")
+    except Exception as e:
+        print(f"\nA client-side error occured: {e}")
