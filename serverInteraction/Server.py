@@ -1,20 +1,16 @@
-#!/usr/bin/env python
-
-"""Echo server using the asyncio API."""
-
 import asyncio
-from websockets.asyncio.server import serve
+import websockets
 
+PORT = 8765
 
-async def echo(websocket):
+async def echo(websocket, path):
     async for message in websocket:
         await websocket.send(message)
 
-
 async def main():
-    async with serve(echo, "localhost", 8765) as server:
-        await server.serve_forever()
-
+    server = await websockets.serve(echo, "localhost", PORT)
+    print(f"Server listening on Port {PORT}")
+    await server.wait_closed()
 
 if __name__ == "__main__":
     asyncio.run(main())
