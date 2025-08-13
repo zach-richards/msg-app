@@ -21,9 +21,6 @@ async def hello():
 if __name__ == "__main__":
     try:
         asyncio.run(hello())
-    except KeyboardInterrupt: # Error handling
-        print("\nConnection stopped manually.")
-    except ConnectionRefusedError:
-        print("\nConnection refused. Is the server running?")
     except Exception as e:
-        print(f"\nA client-side error occured: {e}")
+        import traceback
+        traceback.print_exc()
